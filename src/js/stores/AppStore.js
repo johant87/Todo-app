@@ -6,9 +6,15 @@ var AppAPI = require('../utils/AppAPI.js');
 
 var CHANGE_EVENT = 'change';
 
-var _tasks = [];
+var _lists = [];
 
 var AppStore = assign({}, EventEmitter.prototype, {
+    addList: function(list){
+      _lists.push(list);
+    },
+    getLists: function(){
+      return _lists;
+    },
     emitChange: function(){
       this.emit(CHANGE_EVENT);
     },
@@ -24,7 +30,14 @@ AppDispatcher.register(function(payload){
   var action = payload.action;
 
   switch(action.actionType){
+      case AppConstants.ADD_LIST:
+      
+      //Appstore
+      AppStore.addList(action.list);
+      //API
+      AppAPI.addList(action.list);
 
+      AppStore.emit(CHANGE_EVENT);
   }
 
   return true;
