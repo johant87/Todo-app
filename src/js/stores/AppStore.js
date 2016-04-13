@@ -15,6 +15,9 @@ var AppStore = assign({}, EventEmitter.prototype, {
     getLists: function(){
       return _lists;
     },
+    setLists: function(lists){
+      _lists = lists;
+    },
     emitChange: function(){
       this.emit(CHANGE_EVENT);
     },
@@ -30,14 +33,22 @@ AppDispatcher.register(function(payload){
   var action = payload.action;
 
   switch(action.actionType){
-      case AppConstants.ADD_LIST:
-      
+    case AppConstants.ADD_LIST:
+      console.log("adding list...")
       //Appstore
       AppStore.addList(action.list);
       //API
       AppAPI.addList(action.list);
 
       AppStore.emit(CHANGE_EVENT);
+      break;
+    case AppConstants.RECEIVE_LISTS:
+      console.log("Receiving lists...")
+      //Appstore
+      AppStore.setLists(action.lists);
+
+      AppStore.emit(CHANGE_EVENT);
+      break;
   }
 
   return true;

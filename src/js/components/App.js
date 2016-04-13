@@ -2,6 +2,7 @@ var React = require('react');
 var AppActions = require('../actions/AppActions');
 var AppStore = require('../stores/AppStore');
 var AddListForm = require('./AddListForm.js')
+var ShowList = require('./ShowList.js')
 
 function getAppState(){
   return {
@@ -24,10 +25,11 @@ var App = React.createClass({
   },
 
   render: function(){
-    console.log(this.state.lists)
     return(
+
       <div>
         <AddListForm />
+        <ShowList lists = {this.state.lists} />
       </div>
     );
   },

@@ -7,7 +7,13 @@ var AppActions = {
         actionType: AppConstants.ADD_LIST,
         list: list
       });
-    }
+    },
+    receiveLists: function(lists){
+      AppDispatcher.handleViewAction({
+        actionType: AppConstants.RECEIVE_LISTS,
+        lists: lists
+    });
+  }
 }
 
 module.exports = AppActions;

@@ -9,5 +9,18 @@ module.exports = {
         contentType: "application/json",
         dataType: "json"
       });
+  },
+  getLists: function(){
+    $.ajax({
+      url:"https://todo-api-johan.herokuapp.com/lists.json",
+      dataType: "json",
+      cache: false,
+      success: function(data){
+          AppActions.receiveLists(data);
+      }.bind(this),
+      error: function(xhr, status, err){
+          console.log(err)
+      }.bind(this)
+    });
   }
 }
